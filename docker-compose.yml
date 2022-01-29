@@ -1,0 +1,20 @@
+version: '3'
+services:
+  lab:
+    build: ./
+    container_name: qiita_project_lab
+    user: root
+    volumes:
+      - ./:/app
+    working_dir: /workspaces/qiita_project
+    ports:
+      - "8882:8882"
+    command: jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.token='' --port=8882
+
+  shell:
+    build: ./
+    container_name: qiita_project_shell
+    volumes:
+      - ./:/workspaces/qiita_project
+    working_dir: /workspaces/qiita_project
+    command: /bin/bash
